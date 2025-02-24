@@ -1,0 +1,19 @@
+/* Dark and Night mode variables are placed here and these are used for coloring and will 
+automatically change based on selected theme */
+:root {
+  --content-background-color: var(--mantine-color-gray-0);
+  --content-box-shadow-color: rgba(0, 0, 0, 0.1);
+  --button-hover-background-color: var(--mantine-color-gray-0);
+}
+
+[data-mantine-color-scheme='dark'] {
+  --content-background-color: var(--mantine-color-dark-6);
+  --content-box-shadow-color: rgba(0, 0, 0, 0.5);
+  --button-hover-background-color: var(--mantine-color-dark-6);
+}
+
+/* style overrides for mantine components */
+
+.input-label {
+  margin-bottom: rem(8px)
+}

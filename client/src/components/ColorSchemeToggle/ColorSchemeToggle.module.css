@@ -1,0 +1,10 @@
+.toggleButton {
+  border-radius: var(--mantine-radius-sm);
+  border: 1px solid var(--mantine-color-default-border);
+  background: var(--mantine-color-default);
+  transition: background-color 150ms ease;
+}
+
+.toggleButton:hover {
+  background-color: var(--mantine-color-default-hover);
+}

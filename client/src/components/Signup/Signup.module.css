@@ -1,0 +1,9 @@
+.signupForm {
+    width: 100%;
+    max-width: 400px;
+    min-width: 250px;
+
+    @media (min-width: $mantine-breakpoint-sm) {
+        width: 80%;
+      }
+}

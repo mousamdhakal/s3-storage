@@ -1,0 +1,7 @@
+.userProfileButton {
+    padding: rem(4px 12px);
+}
+
+.userProfileButton:hover {
+    background-color: var(--button-hover-background-color);
+}

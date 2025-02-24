@@ -1,0 +1,37 @@
+/* AuthComponent.module.css */
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.box {
+  width: 90%;
+  max-width: 1200;
+  min-width: 60%;
+  padding: rem(24px);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px var(--content-box-shadow-color);
+  background-color: var(--content-background-color);
+  overflow: hidden;
+
+  @media (min-width: $mantine-breakpoint-sm) {
+    padding: rem(64px);
+    min-height: 550px;
+  }
+}
+
+.imageContainer {
+  display: none; /* Hide image on mobile */
+
+  @media (min-width: $mantine-breakpoint-sm) {
+    display: block;
+  }
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 24px;
+}
