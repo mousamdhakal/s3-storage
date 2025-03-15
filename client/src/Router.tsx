@@ -4,8 +4,8 @@ import { ProtectedRoute } from './components/hoc/ProtectedRoute';
 import { UnprotectedRoute } from './components/hoc/UnprotectedRoute';
 import AuthPage from './pages/Auth/Auth.page';
 import DashboardPage from './pages/Dashboard/Dashboard.page';
-import HomePage from './pages/Home/Home.page';
-import SecondPage from './pages/SecondPage/SecondPage.page';
+import { PublicFileViewer } from './pages/PublicFilesViewer/PublicFilesViewer';
+import { FileUploader } from './components/FileUploader/FileUploader';
 
 const router = createBrowserRouter([
   {
@@ -14,12 +14,12 @@ const router = createBrowserRouter([
       {
         path: '/auth',
         element: <AuthPage />,
-      },
-      {
-        path: '/',
-        element: <HomePage />,
-      },
+      }      
     ],
+  },
+  {
+    path: '/file/view/:fileId',
+    element: <PublicFileViewer />,
   },
   {
     element: <ProtectedRoute />,
@@ -32,8 +32,8 @@ const router = createBrowserRouter([
             element: <DashboardPage />,
           },
           {
-            path: '/secondPage',
-            element: <SecondPage />,
+            path: '/upload',
+            element: <FileUploader />,
           }
         ],
       },
