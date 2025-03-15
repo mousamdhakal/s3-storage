@@ -1,4 +1,4 @@
-import { IconHome2} from '@tabler/icons-react';
+import { IconHome2, IconUpload, IconUsers} from '@tabler/icons-react';
 import { Outlet, NavLink as RouterLink } from 'react-router-dom';
 import {
   AppShell,
@@ -47,11 +47,11 @@ export default function DashboardLayout() {
             leftSection={<IconHome2 size={16} stroke={1.5} />}
           />
           <NavLink
-            label="Second Page"
-            to="/secondPage"
+            label="Upload"
+            to="/upload"
             mb={8}
             component={RouterLink}
-            leftSection={<IconHome2 size={16} stroke={1.5} />}
+            leftSection={<IconUpload size={16} stroke={1.5} />}
           />
         </AppShell.Section>
 

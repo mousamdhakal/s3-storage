@@ -1,0 +1,206 @@
+.fileListContainer {
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .fileListContainer:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .scrollArea {
+    max-height: 550px;
+  }
+  
+  .fileTable {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  
+  .tableHeader {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(8px);
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  
+  .tableHeader th {
+    padding: 16px 12px;
+    font-weight: 600;
+    border-bottom: 2px solid var(--mantine-color-gray-3);
+  }
+  
+  .nameColumn {
+    width: 35%;
+  }
+  
+  .sizeColumn, .typeColumn, .statusColumn {
+    width: 12%;
+  }
+  
+  .dateColumn {
+    width: 18%;
+  }
+  
+  .actionsColumn {
+    width: 11%;
+    text-align: center;
+  }
+  
+  .fileRow {
+    transition: background-color 0.2s ease;
+  }
+  
+  .fileRow:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+  }
+  
+  .fileButton {
+    width: 100%;
+    text-align: left;
+    padding: 8px 0;
+    border-radius: 4px;
+    transition: transform 0.1s ease;
+  }
+  
+  .fileButton:hover {
+    transform: translateX(2px);
+  }
+  
+  .fileName {
+    word-break: break-word;
+    transition: color 0.2s ease;
+  }
+  
+  .fileButton:hover .fileName {
+    color: var(--mantine-color-blue-6);
+  }
+  
+  .fileSize, .fileType, .fileDate {
+    color: var(--mantine-color-gray-6);
+    font-size: 0.85rem;
+  }
+  
+  .statusBadge {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0 8px;
+  }
+  
+  .actionGroup {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .actionButton {
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+  
+  .actionButton:hover {
+    transform: translateY(-2px);
+  }
+  
+  .menuButton {
+    transition: transform 0.2s ease;
+  }
+  
+  .menuButton:hover {
+    transform: rotate(90deg);
+  }
+  
+  .menuDropdown {
+    width: 180px;
+  }
+  
+  .menuItem {
+    padding: 8px 12px;
+  }
+  
+  .deleteMenuItem {
+    color: var(--mantine-color-red-6);
+  }
+  
+  .deleteMenuItem:hover {
+    background-color: var(--mantine-color-red-0);
+  }
+  
+  .loaderContainer {
+    min-height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .errorContainer, .emptyContainer {
+    padding: 30px;
+    text-align: center;
+    background-color: var(--mantine-color-gray-0);
+  }
+  
+  .modalTitle {
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  
+  .modalContent {
+    padding: 20px;
+  }
+  
+  /* File Icon Colors */
+  .folderIcon {
+    color: var(--mantine-color-blue-6);
+  }
+  
+  .imageIcon {
+    color: var(--mantine-color-green-6);
+  }
+  
+  .videoIcon {
+    color: var(--mantine-color-red-6);
+  }
+  
+  .audioIcon {
+    color: var(--mantine-color-violet-6);
+  }
+  
+  .pdfIcon {
+    color: var(--mantine-color-red-7);
+  }
+  
+  .spreadsheetIcon {
+    color: var(--mantine-color-green-7);
+  }
+  
+  .textIcon {
+    color: var(--mantine-color-blue-7);
+  }
+  
+  .zipIcon {
+    color: var(--mantine-color-orange-7);
+  }
+  
+  .fileIcon {
+    color: var(--mantine-color-gray-6);
+  }
+  
+  /* Dark mode customizations */
+  :global(.mantine-ColorScheme-dark) .fileRow:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  :global(.mantine-ColorScheme-dark) .tableHeader th {
+    border-bottom-color: var(--mantine-color-dark-4);
+  }
+  
+  :global(.mantine-ColorScheme-dark) .errorContainer,
+  :global(.mantine-ColorScheme-dark) .emptyContainer {
+    background-color: var(--mantine-color-dark-6);
+  }
+  
+  :global(.mantine-ColorScheme-dark) .deleteMenuItem:hover {
+    background-color: rgba(255, 99, 99, 0.15);
+  }

@@ -1,0 +1,156 @@
+.container {
+  padding: var(--mantine-spacing-md);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: var(--mantine-spacing-md);
+}
+
+.breadcrumbContainer {
+  background-color: var(--mantine-colors-gray-0);
+  border-radius: var(--mantine-radius-md);
+  padding: var(--mantine-spacing-sm);
+  margin-bottom: var(--mantine-spacing-md);
+  box-shadow: var(--mantine-shadow-xs);
+}
+
+:global(.dark-theme) .breadcrumbContainer {
+  background-color: var(--mantine-colors-dark-6);
+}
+
+.breadcrumbLink {
+  cursor: pointer;
+}
+
+.breadcrumbLink:hover {
+  text-decoration: underline;
+}
+
+.segmentedControlLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--mantine-spacing-xs);
+}
+
+/* file-manager-styles.css */
+
+/* General styling */
+.file-manager-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Breadcrumb styling */
+.breadcrumb-container {
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.breadcrumb-container:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* File grid styling */
+.file-card {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.03));
+}
+
+.file-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.file-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  transition: all 0.2s ease;
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+}
+
+.file-card:hover .file-icon-wrapper {
+  transform: scale(1.1);
+}
+
+/* File actions styling */
+.file-actions {
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.dark-mode .file-actions {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Table styling */
+.file-table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.file-table th {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+}
+
+.file-table tbody tr {
+  transition: all 0.2s ease;
+}
+
+.file-table tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.dark-mode .file-table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* Preview styling */
+.preview-container {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.preview-header {
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.preview-content {
+  min-height: 300px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.file-card {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .file-table th:nth-child(3),
+  .file-table td:nth-child(3),
+  .file-table th:nth-child(4),
+  .file-table td:nth-child(4) {
+    display: none;
+  }
+}
