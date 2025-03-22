@@ -277,7 +277,7 @@ export function FileGrid({ folder = '', onFolderOpen }: FileGridProps) {
       </SimpleGrid>
 
       <Modal opened={opened} onClose={close} title={selectedFile?.name || ''} size="xl" centered>
-        {selectedFile && <FilePreview file={selectedFile} />}
+        {selectedFile && <FilePreview file={selectedFile} onDownload={handleDownload} onShare={handleShare} />}
       </Modal>
     </>
   );

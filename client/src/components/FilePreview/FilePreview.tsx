@@ -31,8 +31,8 @@ interface FilePreviewProps {
     uploadedAt?: string;
     isPublic?: boolean;
   };
-  onDownload?: (fileId: string, fileName: string) => void;
-  onShare?: (fileId: string) => void;
+  onDownload?: (e:any, fileId: string, fileName: string) => void;
+  onShare?: (e:any,fileId: string) => void;
 }
 
 export function FilePreview({ file, onDownload, onShare }: FilePreviewProps) {
@@ -146,47 +146,6 @@ export function FilePreview({ file, onDownload, onShare }: FilePreviewProps) {
 
   return (
     <Paper className={classes.previewContainer}>
-      <div className={classes.previewHeader}>
-        <Box>
-          <Group>
-            <Text fw={500} size="lg">
-              {file.name}
-            </Text>
-            {file.isPublic !== undefined && (
-              <Badge color={file.isPublic ? 'green' : 'blue'}>
-                {file.isPublic ? 'Public' : 'Private'}
-              </Badge>
-            )}
-          </Group>
-          <Text size="sm" c="dimmed">
-            {file.type}
-          </Text>
-        </Box>
-
-        <Group>
-          {onDownload && (
-            <ActionIcon
-              color="blue"
-              variant="light"
-              onClick={() => onDownload(file.id, file.name)}
-              title="Download"
-            >
-              <IconDownload size={18} />
-            </ActionIcon>
-          )}
-
-          {onShare && file.isPublic && (
-            <ActionIcon
-              color="green"
-              variant="light"
-              onClick={() => onShare(file.id)}
-              title="Share"
-            >
-              <IconShare size={18} />
-            </ActionIcon>
-          )}
-        </Group>
-      </div>
 
       {renderPreview()}
 
@@ -203,6 +162,30 @@ export function FilePreview({ file, onDownload, onShare }: FilePreviewProps) {
               <Text size="sm">{formatFileSize(file.size)}</Text>
             </div>
           </Group>
+
+        <Group>
+          {onDownload && (
+            <ActionIcon
+              color="blue"
+              variant="light"
+              onClick={(e) => onDownload(e,file.id, file.name)}
+              title="Download"
+            >
+              <IconDownload size={18} />
+            </ActionIcon>
+          )}
+
+          {onShare && file.isPublic && (
+            <ActionIcon
+              color="green"
+              variant="light"
+              onClick={(e) => onShare(e, file.id)}
+              title="Share"
+            >
+              <IconShare size={18} />
+            </ActionIcon>
+          )}
+        </Group>
 
           {file.uploadedAt && (
             <div className={classes.metadataItem}>

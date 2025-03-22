@@ -77,6 +77,11 @@ import {
     const handleDownload = (fileId: string, fileName: string) => {
       downloadFile.mutate({ fileId, fileName });
     };
+
+    const handleShare = (e: React.MouseEvent, fileId: string) => {
+      e.stopPropagation();
+      getShareLink.mutate(fileId);
+    };
   
     const getFileIcon = (type: string) => {
       switch (true) {
@@ -268,7 +273,7 @@ import {
             content: styles.modalContent
           }}
         >
-          {selectedFile && <FilePreview file={selectedFile} />}
+          {selectedFile && <FilePreview file={selectedFile} onDownload={handleDownload} onShare={handleShare} />}
         </Modal>
       </>
     );

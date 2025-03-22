@@ -4,6 +4,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { AppError } from '../utils/errors';
 import { LoginRequest, RegisterRequest } from '../types/auth';
+import { createLog, LogAction } from '../services/logging';
 
 const prisma = new PrismaClient();
 
@@ -55,6 +56,9 @@ const register = async (
       expiresIn: '1d',
     });
 
+    // Log user registration
+    await createLog(user.id, LogAction.REGISTER, undefined, undefined);
+
     res.status(201).json({
       message: 'User created successfully',
       token,
@@ -100,6 +104,8 @@ const login = async (req: Request<{}, {}, LoginRequest>, res: Response) => {
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
       expiresIn: '1d',
     });
+
+    await createLog(user.id, LogAction.LOGIN, undefined, undefined);
 
     res.json({
       message: 'Logged in successfully',

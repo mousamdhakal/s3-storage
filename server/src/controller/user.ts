@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 import { AppError } from '../utils/errors';
 import { ChangePasswordRequest, UpdateUserRequest } from '../types/user';
+import { createLog, LogAction } from '../services/logging';
 
 const prisma = new PrismaClient();
 
@@ -46,6 +47,13 @@ const changePassword = async (
         passwordChangedAt: new Date(),
       },
     });
+
+    // Log password change
+    await createLog(
+      userId,
+      LogAction.CHANGE_PASSWORD,
+      'Changed account password'
+    );
 
     res.json({ message: 'Password updated successfully' });
   } catch (error) {
@@ -92,6 +100,20 @@ const updateUser = async (
         ...(lastname && { lastname }),
       },
     });
+
+
+
+    // Log the update
+    const updatedFields = [];
+    if (email) updatedFields.push('email');
+    if (firstname) updatedFields.push('firstname');
+    if (lastname) updatedFields.push('lastname');
+
+    await createLog(
+      userId,
+      LogAction.UPDATE_USER,
+      `Updated user profile fields: ${updatedFields.join(', ')}`
+    );
 
     res.json({
       message: 'User updated successfully',
