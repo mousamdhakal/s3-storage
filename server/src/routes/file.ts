@@ -22,8 +22,6 @@ router.patch('/:fileId/visibility', authenticateToken, toggleFileVisibility);
 
 // Routes with optional authentication
 router.get('/:fileId/url', optionalAuthenticateToken, getFileUrl);
-
-// Public routes (no authentication required)
-router.get('/:fileId/share', getPublicShareLink);
+router.get('/:fileId/share', optionalAuthenticateToken, getPublicShareLink);
 
 export default router;

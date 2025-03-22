@@ -17,7 +17,7 @@ import classes from './FileManager.module.css';
 
 export function FileManager() {
   const [currentFolder, setCurrentFolder] = useState('');
-  const [viewMode, setViewMode] = useState<'table' | 'grid'>('table');
+  const [viewMode, setViewMode] = useState<'table' | 'grid'>('grid');
   const theme = useMantineTheme();
   
   const folders = currentFolder ? currentFolder.split('/').filter(Boolean) : [];

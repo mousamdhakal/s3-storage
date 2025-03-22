@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import multer from 'multer';
 import { AppError } from '../utils/errors';
 import * as s3 from '../services/s3';
+import { createLog, LogAction } from '../services/logging';
 
 const prisma = new PrismaClient();
 
@@ -58,6 +59,14 @@ export const uploadFile = async (
                 isPublic: isPublic === 'true' || isPublic === true,
             },
         });
+
+        // Log the upload action
+        await createLog(
+            userId,
+            LogAction.UPLOAD,
+            `Uploaded file: ${file.originalname}`,
+            fileRecord.id
+        );
 
         res.status(201).json({
             message: 'File uploaded successfully',
@@ -122,6 +131,16 @@ export const getFileUrl = async (
             downloadUrl = await s3.getFileUrl(userId, file.key);
         }
 
+        // Log the download action if user is authenticated
+        if (userId) {
+            await createLog(
+                userId,
+                LogAction.DOWNLOAD,
+                `Downloaded file: ${file.name}`,
+                fileId
+            );
+        }
+
         res.json({
             url: downloadUrl,
             file: {
@@ -174,6 +193,14 @@ export const toggleFileVisibility = async (
             data: { isPublic: !file.isPublic },
         });
 
+        // Log the action
+        await createLog(
+            userId,
+            LogAction.TOGGLE_VISIBILITY,
+            `Toggled file visibility: ${file.name} (${file.isPublic} -> ${updatedFile.isPublic})`,
+            fileId
+        );
+
         res.json({
             message: `File is now ${updatedFile.isPublic ? 'public' : 'private'}`,
             file: {
@@ -213,6 +240,16 @@ export const getPublicShareLink = async (
         // Generate a shareable URL for your application
         const baseUrl = process.env.APP_URL || 'http://localhost:5173';
         const shareUrl = `${baseUrl}/file/view/${fileId}`;
+
+        if (req?.user?.id) {
+            // Log the share action
+            await createLog(
+                req.user?.id,
+                LogAction.SHARE,
+                `Shared file: ${file.name}`,
+                fileId
+            );
+        }
 
         res.json({
             shareUrl,
@@ -262,6 +299,14 @@ export const deleteFile = async (
         await prisma.file.delete({
             where: { id: fileId },
         });
+
+        // Log the action
+        await createLog(
+            userId,
+            LogAction.DELETE,
+            `Deleted file: ${file.name}`,
+            fileId
+        );
 
         res.json({
             message: 'File deleted successfully',
@@ -320,6 +365,13 @@ export const listFiles = async (
                     url: url, // Add the presigned URL
                 };
             })
+        );
+
+        // Log the action
+        await createLog(
+            userId,
+            LogAction.VIEW_FILES,
+            `Listed files in folder: ${folder}`,
         );
 
         res.json({

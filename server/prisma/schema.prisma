@@ -19,6 +19,7 @@ model User {
   updatedAt         DateTime  @updatedAt
 
   File File[]
+  Log  Log[]
 }
 
 model File {
@@ -39,7 +40,28 @@ model File {
 
   // Sharing
   isPublic Boolean @default(false)
+  Log      Log[]
 
   @@index([userId])
   @@index([folder])
+}
+
+model Log {
+  id        String   @id @default(uuid())
+  action    String // "UPLOAD", "DOWNLOAD", "DELETE", "SHARE", "UPDATE"
+  details   String? // Additional information about the action
+  timestamp DateTime @default(now())
+
+  // User relationship
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Optional file relationship (for file-related actions)
+  fileId String?
+  file   File?   @relation(fields: [fileId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([fileId])
+  @@index([action])
+  @@index([timestamp])
 }
