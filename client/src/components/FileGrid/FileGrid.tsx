@@ -51,7 +51,7 @@ interface FileGridProps {
 }
 
 export function FileGrid({ folder = '', onFolderOpen }: FileGridProps) {
-  const { data, isLoading, isError } = useListFiles(folder);
+  const { data, isLoading, isError } = useListFiles(folder) as any;
   const deleteFile = useDeleteFile();
   const toggleVisibility = useToggleFileVisibility();
   const downloadFile = useDownloadFile();
@@ -177,7 +177,7 @@ export function FileGrid({ folder = '', onFolderOpen }: FileGridProps) {
         spacing="md"
         className={classes.gridContainer}
       >
-        {data.files.map((file) => (
+        {data.files.map((file:any) => (
           <Paper
             key={file.id}
             withBorder

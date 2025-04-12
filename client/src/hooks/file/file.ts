@@ -87,14 +87,7 @@ export function useListFiles(folder?: string) {
             const params = folder ? { folder } : {};
             const { data } = await api.get('/file/list', { params });
             return data;
-        },
-        onError: (error) => {
-            notifications.show({
-                title: 'Failed to load files',
-                message: error.response?.data.message || 'Something went wrong',
-                color: 'red',
-            });
-        },
+        }
     });
 }
 
@@ -106,14 +99,7 @@ export function useGetFileUrl(fileId: string, enabled = false) {
             const { data } = await api.get(`/file/${fileId}/url`);
             return data;
         },
-        enabled,
-        onError: (error) => {
-            notifications.show({
-                title: 'Failed to get file URL',
-                message: error.response?.data.message || 'Something went wrong',
-                color: 'red',
-            });
-        },
+        enabled
     });
 }
 

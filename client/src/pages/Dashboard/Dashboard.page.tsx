@@ -31,6 +31,7 @@ import {
   Text,
   Title,
   Tooltip,
+  useMantineColorScheme,
   useMantineTheme,
 } from '@mantine/core';
 import { useLogStats } from '@/hooks/log/log';
@@ -45,7 +46,7 @@ const ACTION_ICONS = {
   EDIT: <IconEdit size={20} />,
   LOGIN: <IconLogin size={20} />,
   TOGGLE_VISIBILITY: <IconEyeOff size={20} />,
-};
+} as any;
 
 const ACTION_COLORS = {
   UPLOAD: 'blue',
@@ -56,15 +57,15 @@ const ACTION_COLORS = {
   EDIT: 'orange',
   LOGIN: 'cyan',
   TOGGLE_VISIBILITY: 'pink',
-};
+} as any;
 
 // This function helps display friendly names to the user
-const getActionDisplayName = (actionKey) => {
+const getActionDisplayName = (actionKey:string) => {
   const displayNames = {
     VIEW_FILES: 'View',
     TOGGLE_VISIBILITY: 'Toggle Visibility',
     LOGIN: 'Login',
-  };
+  } as any;
   
   return displayNames[actionKey] || actionKey.charAt(0) + actionKey.slice(1).toLowerCase();
 };
@@ -78,7 +79,7 @@ const TimeRangeOptions = [
 ];
 
 // Custom tooltip component for bar chart
-const FileAccessTooltip = ({ active, payload }) => {
+const FileAccessTooltip = ({ active, payload }:any) => {
   if (active && payload && payload.length) {
     return (
       <Paper p="md" withBorder shadow="md" radius="md">
@@ -93,16 +94,18 @@ const FileAccessTooltip = ({ active, payload }) => {
 export default function DashboardPage() {
   const theme = useMantineTheme();
   const [timeRange, setTimeRange] = useState('30days');
+  const { colorScheme } = useMantineColorScheme();
+  
   const { data: stats, isLoading, error } = useLogStats(timeRange);
   
   // Get color for action from theme
-  const getActionColor = (action) => {
+  const getActionColor = (action:string) => {
     const colorKey = ACTION_COLORS[action] || 'gray';
-    return theme.colors[colorKey][theme.colorScheme === 'dark' ? 5 : 6];
+    return theme.colors[colorKey][colorScheme === 'dark' ? 5 : 6];
   };
   
   // Get icon for action
-  const getActionIcon = (action) => {
+  const getActionIcon = (action:string) => {
     return ACTION_ICONS[action] || <IconFile size={20} />;
   };
 
@@ -172,7 +175,7 @@ export default function DashboardPage() {
 
   // Transform weekly trend data for the stacked area chart
   const weeklyTrendData = stats.weeklyTrend.map(week => {
-    const newWeek = { week: week.week };
+    const newWeek = { week: week.week } as any;
     availableActions.forEach(action => {
       if (action !== 'week') {
         newWeek[getActionDisplayName(action)] = week[action] || 0;
@@ -182,7 +185,7 @@ export default function DashboardPage() {
   });
 
   // Format file names to prevent overflow
-  const formatFileName = (name) => {
+  const formatFileName = (name: string) => {
     return name.length > 20 ? `${name.substring(0, 17)}...` : name;
   };
 

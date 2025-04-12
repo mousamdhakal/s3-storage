@@ -71,14 +71,7 @@ export function useUserLogs(params: LogQueryParams = {}) {
         queryFn: async () => {
             const { data } = await api.get('/logs', { params });
             return data;
-        },
-        onError: (error) => {
-            notifications.show({
-                title: 'Failed to load activity logs',
-                message: error.response?.data.message || 'Something went wrong',
-                color: 'red',
-            });
-        },
+        }
     });
 }
 
@@ -90,14 +83,7 @@ export function useLogDetails(logId: string, enabled = true) {
             const { data } = await api.get(`/logs/${logId}`);
             return data;
         },
-        enabled,
-        onError: (error) => {
-            notifications.show({
-                title: 'Failed to load log details',
-                message: error.response?.data.message || 'Something went wrong',
-                color: 'red',
-            });
-        },
+        enabled
     });
 }
 
@@ -109,14 +95,7 @@ export function useFileActivityLogs(fileId: string, enabled = true) {
             const { data } = await api.get(`/logs/file/${fileId}`);
             return data;
         },
-        enabled,
-        onError: (error) => {
-            notifications.show({
-                title: 'Failed to load file activity',
-                message: error.response?.data.message || 'Something went wrong',
-                color: 'red',
-            });
-        },
+        enabled
     });
 }
 
@@ -176,7 +155,7 @@ export function useExportLogs() {
 interface LogStatsResponse {
     actionCounts: { action: string; count: number }[];
     dailyActivity: { date: string; count: number }[];
-    mostAccessedFiles: { id: string; name: string; count: string }[];
+    mostAccessedFiles: { id: string; name: string; count: string | number }[];
     weeklyTrend: Record<string, number | string>[];
 }
 
@@ -202,13 +181,6 @@ export function useLogStats(timeRange: string = '30days') {
                     count: typeof file.count === 'string' ? Number(file.count) : file.count
                 }))
             };
-        },
-        onError: (error) => {
-            notifications.show({
-                title: 'Failed to load activity statistics',
-                message: error.response?.data.message || 'Something went wrong',
-                color: 'red',
-            });
         },
         // Refresh every 30 minutes
         refetchInterval: 30 * 60 * 1000
