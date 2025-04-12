@@ -150,7 +150,7 @@ export function FileUploader({ folder = '', onSuccess = () => {} }) {
             radius="xl" 
             color={uploadFile.isSuccess ? 'green' : 'blue'} 
             striped={uploadFile.isPending}
-            animate={uploadFile.isPending}
+            animated={uploadFile.isPending}
           />
         </Box>
       )}

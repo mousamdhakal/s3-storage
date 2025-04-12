@@ -323,11 +323,8 @@ export default function LogsPage() {
             </Text>
             <DatePicker
               type="range"
-              placeholder="Select date range"
               value={dateRange}
               onChange={setDateRange}
-              clearable
-              valueFormat="DD MMM YYYY"
             />
           </Stack>
 
