@@ -305,7 +305,6 @@ export const deleteFile = async (
             userId,
             LogAction.DELETE,
             `Deleted file: ${file.name}`,
-            fileId
         );
 
         res.json({
