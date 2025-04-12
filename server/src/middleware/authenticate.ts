@@ -4,7 +4,7 @@ import { PrismaClient, User } from '@prisma/client';
 
 const prisma = new PrismaClient();
 interface JwtPayload {
-  userId: number;
+  userId: string;
   iat: number; // issued at timestamp
 }
 
