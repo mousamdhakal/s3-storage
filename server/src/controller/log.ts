@@ -323,7 +323,7 @@ export const getLogStatistics = async (
         `;
 
         // Format weekly trend data
-        const formattedWeeklyTrend = [];
+        const formattedWeeklyTrend:any = [];
         const weekMap = new Map();
 
         (weeklyTrend as any[]).forEach(item => {
