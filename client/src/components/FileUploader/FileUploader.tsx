@@ -69,7 +69,6 @@ export function FileUploader({ folder = '', onSuccess = () => {} }) {
           loading={uploadFile.isPending}
           multiple={false}
           radius="md"
-          accept={['image/*', 'application/pdf', '.docx', '.xlsx']}
           className={fileName ? 'border-blue-400' : ''}
         >
           <Group justify="center" gap="xl" style={{ minHeight: 140, pointerEvents: 'none' }}>
